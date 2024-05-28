@@ -1,0 +1,92 @@
+
+#job_offer_page{
+    width: 40vw;
+    height: 45vw;
+    margin: auto;
+    margin-left: 7vw;
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    border-radius: 11px;
+}
+input {
+    border: none;
+}
+input:hover{
+    cursor: default;
+}
+#job_offer_header{
+    background-color: #ffffff;
+    width: 40vw;
+    height: 10vw;
+    margin: auto;
+    padding-top: 2vw;
+    border-radius: 11px;
+}
+.job_offer_page_name{
+    width: 30vw;
+    margin-left: 2vw;
+    font-size: 2vw;
+}
+.job_offer_page_company{
+    font-size: 1vw;
+    margin-left: 2vw;
+    margin-top: 0.5vw;
+    width: 30vw;
+}
+.job_offer_page_location{
+    font-size: 1vw;
+    margin-left: 2vw;
+    margin-top: 1vw;
+    width: 30vw;
+}
+#job_offer_middle{
+    width: 40vw;
+    height: 19vw;
+    background-color: #ffffff;
+    border-radius: 11px;
+    margin: auto;
+    margin-top: 1vw;
+    padding-top: 2vw;
+}
+#job_offer_page_salary{
+    margin-left: 2vw;
+}
+.salaryInput{
+    width: 30vw;
+    color: #48BB78;
+    font-size: 1vw;
+}
+#job_offer_page_description{
+    padding: 2vw;
+    text-align: center;
+}
+.desc_text_area{
+    resize: none;
+    background-color: #ffffff;
+    width: 36vw;
+    height: 10vw;
+    border: none;
+    font-family: "Nunito Sans", sans-serif;
+}
+.desc_text_area:hover{
+    cursor: default;
+}
+#job_offer_page_footer{
+    border-radius: 11px;
+    background-color: #ffffff;
+    width: 38vw;
+    height: 11vw;
+    padding: 1vw;
+    margin: 1vw auto;
+}
+.job_offer_page_footer_level, .job_offer_page_footer_date, .job_offer_page_footer_time, .job_offer_page_footer_workplace{
+    width: 50%;
+    float: left;
+}
+.footer_level_subtext{
+    font-size: 1vw;
+}
+.job_offer_page_date{
+    margin-left: 12vw;
+    margin-top: -1.2vw;
+}

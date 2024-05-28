@@ -1,0 +1,152 @@
+body {
+    background-color: #f5f5f5; 
+    margin: auto;
+    font-family: "Nunito Sans", sans-serif;
+}
+#form_background {
+    width: 40vw;
+    height: 55vw;
+    background-color: #ffffff;
+    margin: 1vw auto 1vw auto;
+    border-radius: 11px;
+    text-align: center;
+    padding-top: 1vw;
+}
+#stage_header{
+  width: 40vw;
+  height: 18vw;
+  margin: auto;
+  margin-top: 3vw;
+  margin-bottom: 1vw;
+  border-radius: 11px;
+  background-color: #ffffff;
+}
+#stage_header{
+  width: 40vw;
+  margin-bottom: 1vw;
+}
+#stage{
+  margin: -2vw 0vw 5vw 0vw;
+  width: 40vw;
+  height: 8vw;
+  text-align: right;
+}
+#stage label {
+  font-size: 2vw;
+  float: left;
+}
+#stage label:first-child{
+  margin-left: 1vw;
+}
+.stage {
+  border-radius: 50%;
+  padding: 1vw 1.7vw;
+  background-color: #f0f0f0;
+}
+.checked {
+  background-color: #f5f5f5;
+  border: 2px solid black;
+  transition: border 4s;
+}
+hr { 
+  width: 10vw;
+  margin: 4vw 0.5vw 0vw 0.5vw;
+  float: left; 
+  height: 1px; 
+  background: black; 
+}
+.job_name, .company_name, .localization, .experience, .type, .workplace, .min_salary, .max_salary, .description{
+    margin-bottom: 1.8vw;
+}
+.form_text_box{
+    width: 15vw;
+    height: 1.9vw;
+    border-radius: 11px;
+    padding: 0.5vw;
+    border: 1px solid rgb(228, 225, 225);
+    text-align: center;
+    margin-left: 0.5vw;
+    margin-top: 0.5vw;
+    font-size: 1vw;
+}
+input:focus {
+    outline: none;
+}
+#job_offer_page_preview input {
+  border: none;
+  
+}
+.min, .max {
+    width: 7vw;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.desc {
+  width: 38vw;
+  height: 25vw;
+  padding: 1vw 1vw 1vw 1vw;
+  text-align: left;
+  font-size: 0.8vw;
+  resize: none;
+  margin-top: 0.5vw;
+  font-family: "Nunito Sans", sans-serif;
+}
+.label_text {
+  font-size: 1vw;
+}
+.experience, .type, .workplace{
+  width: 25vw;
+  margin-left: 17.2vw;
+  text-align: left;
+}
+.radio {
+  margin: 0.5vw 0.3vw 0 0;
+}
+input.radio {
+  width: 0.8vw;
+  height: 0.8vw;
+  appearance: none;
+  border: 1px solid black;
+  border-radius: 50%;
+  transition: 0.1s all linear;
+  font-size: 2vw
+}
+input.radio:checked{
+  border: 0.35vw solid black;
+}
+.radio_exp, .radio_type, .radio_workplace{
+  font-size: 1vw;
+}
+.button_back, .button_next, .button_apply{
+  border: 2px solid rgb(228, 225, 225);
+  background-color: #ffffff;
+  padding: 0.3vw 0.8vw;
+  border-radius: 11px;
+  font-size: 1vw;
+  width: 6vw;
+  
+}
+.button_back{
+  position: relative;
+  left: 2vw;
+  float: left;
+}
+.button_apply{
+  margin:0 0 3vw 26vw;
+}
+.button_next{
+  margin:0 0 3vw 24vw;
+}
+button:hover, .button_apply:hover{
+  cursor: pointer;
+  background-color: #f0f0f0;
+  transition: 0.2s all linear;
+}
+
+
+
+
+

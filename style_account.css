@@ -1,0 +1,227 @@
+body {
+    background-color: #f5f5f5;
+    margin: 0;  
+    font-family: "Nunito Sans", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  
+}
+
+#container {
+    background-color: #ffffff;
+    width: 30vw;
+    padding: 20px;  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+    text-align: center;
+    border-radius: 11px;
+}
+.main_text{
+    font-size: 2vw;
+}
+.pointingLabel{
+    cursor: pointer;
+}
+
+#personal, #company{
+    width: 10vw;
+    height: 9vw;
+    border-radius: 11px;
+    float: left;
+    margin-left: 2.5vw;
+    padding: 1vw;
+}
+.personalTipText, .companyTipText{
+    visibility: hidden;
+}
+#personal:hover .personalTipText{
+    visibility: visible;
+}
+#company:hover .companyTipText{
+    visibility: visible;
+}
+#personal:hover, #company:hover{
+    background-color: #A9A9A9;
+    transition: ease 0.5s;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.fa-person, .fa-building{
+    font-size: 4vw;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    width: calc(100% - 22px);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+#error{
+    padding: 1vw;
+}
+#account{
+    margin: auto;
+    width: 57vw;
+    height: 40vw;
+    margin-top: 5.81vw;
+}
+#nav {
+    width: 15vw;
+    height: 40vw;
+    float: left;
+    border-radius: 11px;
+    background-color: #ffffff;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+li {
+    width: 11vw;
+    margin: 0.5vw auto; 
+    text-align: center;
+    font-size: 1.5vw;
+    border-radius: 11px;
+    padding: 1vw;
+}
+li:hover{
+    cursor: pointer;
+    background-color: #A9A9A9; 
+    transition: ease 0.5s;
+}
+#myPhoto {
+    width: 10vw;
+    height: 10vw;
+    float: left;
+}
+img{
+    border-radius: 40px;
+}
+#main_info{
+    background-color: #ffffff;
+    margin-left: 17vw;
+    width: 40vw;
+    height: 10vw;
+    border-radius: 11px;
+    padding: 1vw;
+}
+#mainInfo{
+    margin-left: 11vw;
+    width: 30vw;
+}
+#contact{
+    background-color: #ffffff;
+    margin-left: 17vw;
+    width: 39vw;
+    height: 4vw;
+    border-radius: 11px;
+}
+
+.name, .work, .birthDate, .mail, .phoneNumber, .nameEditable, .workEditable, .birthDateEditable, .mailEditable, .phoneNumberEditable{
+    width: 8vw;
+    text-align: center;
+    font-size: 0.8vw;
+    padding: 0.5vw;
+}
+.name, .work, .birthDate, .mail, .phoneNumber{
+    background-color: #ffffff;
+    border: none;
+}
+.name, .nameEditable{
+    font-size: 1vw;
+}
+.work, .workEditable {
+    margin-top: -0.9vw;
+    font-size: 0.7vw;
+}
+.birthDate, .birthDateEditable{
+    margin-left: 8vw;
+}
+.phoneNumber, .phoneNumberEditable{
+    margin-left: 20vw;    
+}
+#description{
+    width: 39vw;
+    height: 14vw;
+    margin-left: 17vw;
+    background-color: #ffffff;
+    border-radius: 11px;
+}
+.aboutMe, .aboutMeEditable {
+    width: 38vw; 
+    height: 12vw;
+    resize: none;
+    border-radius: 11px;
+    background-color: #ffffff;
+    padding: 0.5vw;
+}
+.aboutMe{
+    border: none; 
+}
+#contact, #description{
+    margin-top: 2vw;
+    padding: 1.5vw;
+}
+
+#saveMainChanges{
+    margin-left: 7.6vw;
+    margin-top: 3.6vw;
+    display: none;
+}
+#saveContactChanges{
+    margin-left: 18vw;
+    margin-top: 0.4vw;
+    display: none;
+}
+#saveDescriptionChanges{
+    margin-left: 18vw;
+    margin-top: 0.1vw;
+    display: none;
+}
+.editMainInfo, .editContactInfo, .editDescriptionInfo{
+    position: absolute;
+    right: 19.5vw;
+    background-color: #ccc;
+    padding: 0.5vw 1vw;
+    font-size: 0.6vw;
+    border-radius: 11px;
+    cursor: pointer;
+    display: none;
+}
+.editMainInfo{
+    top: 5.9vw;
+}
+.editContactInfo{
+    top: 19.8vw;
+}
+.editDescriptionInfo{
+    top: 28.85vw;
+}
