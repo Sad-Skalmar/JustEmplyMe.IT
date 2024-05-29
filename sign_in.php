@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_result($id, $hashed_password, $company_name);
     $stmt->fetch();
 
-    if ($stmt->num_rows > 0 || password_verify($password, $hashed_password)) {
+    if ($stmt->num_rows > 0 && password_verify($password, $hashed_password)) {
         $_SESSION['user_id'] = $id;
         if (!empty($company_name)) {
             header("Location: my_company_profile.php");
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style_account.css">
 </head>
 <body>
-    <div id="container">
+    <div id="logInContainer">
         <form method="POST">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="password" id="password" name="password" placeholder="Password" required>

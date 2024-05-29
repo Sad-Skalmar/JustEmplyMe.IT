@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id="container">
+    <div id="logInContainer">
         <form method="POST" id="registrationForm">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type = "email" id = "mail" name = "mail" placeholder = "E-mail" required>

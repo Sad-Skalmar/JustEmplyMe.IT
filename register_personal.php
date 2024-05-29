@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style_account.css">
 </head>
 <body>
-    <div id="container">
+    <div id="logInContainer">
         <form method="POST">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="text" id="name" name="name" placeholder="First and last name" required>

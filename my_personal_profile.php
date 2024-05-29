@@ -2,23 +2,28 @@
 include 'database.php';
 session_start();
 
+/*Checking if user is logged in*/
 if (!isset($_SESSION['user_id'])) {
     header("Location: sign_in.php");
     exit();
 }
 
+/*Getting logged user's id*/
 $user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT `name`, `work`, `birthdate`, `mail`, `phone`, `description` FROM users WHERE id = ?");
-if ($stmt === false) {
+/*Selecting info about user*/
+$querySelect = $conn->prepare("SELECT `name`, `work`, `birthdate`, `mail`, `phone`, `description` FROM users WHERE id = ?");
+if ($querySelect === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$stmt->bind_result($name, $work, $birthDate, $email, $phoneNumber, $description);
-$stmt->fetch();
-$stmt->close();
+/*Binding query results to variables*/
+$querySelect->bind_param("i", $user_id);
+$querySelect->execute();
+$querySelect->bind_result($name, $work, $birthDate, $email, $phoneNumber, $description);
+$querySelect->fetch();
+$querySelect->close();
 
+/*Checking if forms are submitted*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['saveMainChanges'])) {
         $name = $_POST['name'] ?? '';
@@ -54,12 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $stmt->close();
     }
+    /*Refreshing the site*/
     header("Refresh:0");
 }
 
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="PL">
@@ -67,48 +72,45 @@ $conn->close();
     <meta charset="UTF-8"/>
     <title>Job Market - Dashboard</title>
     <link rel="stylesheet" href="style_account.css">
-    <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div id = "account">
-    <div id = "nav">
+    <div id="account">
+        <div id="nav">
             <ul>
-                <a href = "my_personal_profile.php"><li>My profile</li></a>
-                <li>My aplications</li>
-                <li>Settings</li>
+                <a href="my_personal_profile.php"><li>My profile</li></a>
+                <a href="my_applications.php"><li>My applications</li></a>
+                <a href="settings.php"><li>Settings</li></a>
             </ul>
         </div>
-        <div id = "main_info">
-            <img id="myPhoto" src="images/myPhoto.png" onerror="this.onerror=null; this.src='images/error.jpg'" alt = "no photo">
-            <button type = "button" id = "editMainInfoId" class = "editMainInfo" onClick = "editMainInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
-            <form method="POST" id = "mainInfo">
-                <input type = "text" name = "name" id = "name" class = "name" value = "<?php echo $name?>" placeholder="First and last name" disabled/>
-                <input type = "date" name = "birthDate" id = "birthDate" class = "birthDate" value = "<?php echo $birthDate?>" placeholder= "Date of birth" disabled/>
-                <input type = "text" name = "work" id = "work" class = "work" value = "<?php echo $work?>" placeholder="Current employment" disabled/></br>
-                <button type = "submit" id = "saveMainChanges" name = "saveMainChanges">Save</button>
+        <div id="main_info">
+            <img id="myPhoto" src="images/myPhoto.png" onerror="this.onerror=null; this.src='images/error.jpg'" alt="no photo">
+            <button type="button" id="editMainInfoId" class="editMainInfo" onClick="editMainInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+            <form method="POST" id="mainInfo">
+                <input type="text" name="name" id="name" class="input" value="<?php echo $name?>" placeholder="First and last name" disabled/>
+                <input type="date" name="birthDate" id="birthDate" class="input" value="<?php echo $birthDate?>" placeholder="Date of birth" disabled/>
+                <input type="text" name="work" id="work" class="input" value="<?php echo $work?>" placeholder="Current employment" disabled/></br>
+                <button type="submit" id="saveMainChanges" name="saveMainChanges">Save</button>
             </form>
         </div>
 
-        <div id = "contact">
-        <button type = "button" id = "editContactInfoId" class = "editContactInfo" onClick = "editContactInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+        <div id="contact">
+            <button type="button" id="editContactInfoId" class="editContactInfo" onClick="editContactInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
             <form method="POST">
-                <input type = "mail" name = "mail" id = "mail" class = "mail" value = "<?php echo $email?>" placeholder="E-mail" disabled/>
-                <input type="tel" name="phoneNumber" id="phoneNumber" class = "phoneNumber" pattern="([0-9]{3} ?){2,4}[0-9]{3}" value = "<?php echo $phoneNumber?>" placeholder="Tel. number (xxx xxx xxx)" disabled/></br>
-                <button type = "submit" id = "saveContactChanges" name = "saveContactChanges">Save</button>
+                <input type="mail" name="mail" id="mail" class="input" value="<?php echo $email?>" placeholder="E-mail" disabled/>
+                <input type="tel" name="phoneNumber" id="phoneNumber" class="input" pattern="([0-9]{3} ?){2,4}[0-9]{3}" value="<?php echo $phoneNumber?>" placeholder="Tel. number (xxx xxx xxx)" disabled/></br>
+                <button type="submit" id="saveContactChanges" name="saveContactChanges">Save</button>
             </form>
         </div>
 
-        <div id = "description">
-            <button type = "button" id = "editDescriptionInfoId" class = "editDescriptionInfo" onClick = "editDescriptionInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+        <div id="description">
+            <button type="button" id="editDescriptionInfoId" class="editDescriptionInfo" onClick="editDescriptionInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
             <form method="POST">
-                <textarea id = "aboutMe" class = "aboutMe" name = "aboutMe" placeholder = "Something about me..." disabled><?php echo $description?></textarea>
-                <button type = "submit" id = "saveDescriptionChanges" name = "saveDescriptionChanges">Save</button>
+                <textarea id="aboutMe" class="input" name="aboutMe" placeholder="Something about me..." disabled><?php echo $description?></textarea>
+                <button type="submit" id="saveDescriptionChanges" name="saveDescriptionChanges">Save</button>
             </form>
         </div>
     </div>
     <script src="script.js"></script>
-    <script>
-        
-    </script>
 </body>
 </html>

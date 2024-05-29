@@ -57,16 +57,16 @@ function editMainInfo(){
     document.getElementById('editMainInfoId').style.display = "none";
     document.getElementById('saveMainChanges').style.display = "block";
 
-    name.classList.remove('name');
-    name.classList.add('nameEditable');
+    name.classList.remove('input');
+    name.classList.add('inputEditable');
     name.removeAttribute('disabled');
 
-    status.classList.remove('work');
-    status.classList.add('workEditable');
+    status.classList.remove('input');
+    status.classList.add('inputEditable');
     status.removeAttribute('disabled');
 
-    birthDate.classList.remove('birthDate');
-    birthDate.classList.add('birthDateEditable');
+    birthDate.classList.remove('input');
+    birthDate.classList.add('inputEditable');
     birthDate.removeAttribute('disabled');
 
 }
@@ -78,12 +78,12 @@ function editContactInfo(){
     document.getElementById('editContactInfoId').style.display = "none";
     document.getElementById('saveContactChanges').style.display = "block";
 
-    mail.classList.remove('mail');
-    mail.classList.add('mailEditable');
+    mail.classList.remove('input');
+    mail.classList.add('inputEditable');
     mail.removeAttribute('disabled');
 
-    phone.classList.remove('phoneNumber');
-    phone.classList.add('phoneNumberEditable');
+    phone.classList.remove('input');
+    phone.classList.add('inputEditable');
     phone.removeAttribute('disabled');
 }
 
@@ -94,51 +94,54 @@ function editDescriptionInfo(){
     document.getElementById('saveDescriptionChanges').style.display = "block";
 
     
+    description.classList.remove('input');
+    description.classList.add('inputEditable');
     description.removeAttribute('disabled');
-    description.classList.remove('aboutMe');
-    description.classList.add('aboutMeEditable');
 }
-        var isEditing = false;
-        const mainInfoOver = document.getElementById('main_info');
-        const mainInfoButton = document.getElementById('editMainInfoId');
-        const contactInfoOver = document.getElementById('contact');
-        const contactInfoButton = document.getElementById('editContactInfoId');
-        const descriptionInfoOver = document.getElementById('description');
-        const descriptionButton = document.getElementById('editDescriptionInfoId');
+var isEditing = false;
+const mainInfoOver = document.getElementById('main_info');
+const mainInfoButton = document.getElementById('editMainInfoId');
+const contactInfoOver = document.getElementById('contact');
+const contactInfoButton = document.getElementById('editContactInfoId');
+const descriptionInfoOver = document.getElementById('description');
+const descriptionButton = document.getElementById('editDescriptionInfoId');
 
-        mainInfoOver.addEventListener('mouseover', () => {
-            if (!isEditing) {
-                mainInfoButton.style.display = "block";
-            }
-        });
+    mainInfoOver.addEventListener('mouseover', () => {
+if (!isEditing) {
+    mainInfoButton.style.display = "block";
+}
+});
 
-        mainInfoOver.addEventListener('mouseout', () => {
-            if (!isEditing) {
-                mainInfoButton.style.display = "none";
-            }
-        });
+mainInfoOver.addEventListener('mouseout', () => {
+if (!isEditing) {
+    mainInfoButton.style.display = "none";
+}
+});
 
-        contactInfoOver.addEventListener('mouseover', () => {
-            if (!isEditing) {
-                contactInfoButton.style.display = "block";
-            }
-        });
+contactInfoOver.addEventListener('mouseover', () => {
 
-        contactInfoOver.addEventListener('mouseout', () => {
-            if (!isEditing) {
-                contactInfoButton.style.display = "none";
-            }
-        });
+    if (!isEditing) {
+        contactInfoButton.style.display = "block";
+    }
+});
 
-        descriptionInfoOver.addEventListener('mouseover', () => {
-            if (!isEditing) {
-                descriptionButton.style.display = "block";
-            }
-        });
 
-        descriptionInfoOver.addEventListener('mouseout', () => {
-            if (!isEditing) {
-                descriptionButton.style.display = "none";
-            }
-        });
+contactInfoOver.addEventListener('mouseout', () => {
+
+    if (!isEditing) {
+        contactInfoButton.style.display = "none";  
+    }
+});
+
+descriptionInfoOver.addEventListener('mouseover', () => {
+    if (!isEditing) {
+        descriptionButton.style.display = "block";
+    }
+});
+
+descriptionInfoOver.addEventListener('mouseout', () => {
+    if (!isEditing) {
+        descriptionButton.style.display = "none";
+    }
+});
 

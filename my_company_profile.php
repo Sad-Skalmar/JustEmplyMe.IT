@@ -82,9 +82,9 @@ $conn->close();
             <img id="myPhoto" src="images/myPhoto.png" onerror="this.onerror=null; this.src='images/error.jpg'" alt = "no photo">
             <button type = "button" id = "editMainInfoId" class = "editMainInfo" onClick = "editMainInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
             <form method="POST" id = "mainInfo">
-                <input type = "text" name = "name" id = "name" class = "name" value = "<?php echo $name?>" placeholder="Company name" disabled/>
-                <input type = "text" name = "tin" id = "birthDate" class = "birthDate" value = "<?php echo $birthDate?>" placeholder= "Tax Identification Numbers(TIN)" disabled/>
-                <input type = "text" name = "work" id = "work" class = "work" value = "<?php echo $work?>" placeholder="Sector" disabled/></br>
+                <input type = "text" name = "name" id = "name" class = "input" value = "<?php echo $name?>" placeholder="Company name" disabled/>
+                <input type = "text" name = "tin" id = "birthDate" class = "input" value = "<?php echo $birthDate?>" placeholder= "Tax Identification Numbers(TIN)" disabled/>
+                <input type = "text" name = "work" id = "work" class = "input" value = "<?php echo $work?>" placeholder="Sector" disabled/></br>
                 <button type = "submit" id = "saveMainChanges" name = "saveMainChanges">Save</button>
             </form>
         </div>
@@ -92,8 +92,8 @@ $conn->close();
         <div id = "contact">
         <button type = "button" id = "editContactInfoId" class = "editContactInfo" onClick = "editContactInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
             <form method="POST">
-                <input type = "mail" name = "mail" id = "mail" class = "mail" value = "<?php echo $email?>" placeholder="E-mail" disabled/>
-                <input type="tel" name="phoneNumber" id="phoneNumber" class = "phoneNumber" pattern="([0-9]{3} ?){2,4}[0-9]{3}" value = "<?php echo $phoneNumber?>" placeholder="Tel. number (xxx xxx xxx)" disabled/></br>
+                <input type = "mail" name = "mail" id = "mail" class = "input" value = "<?php echo $email?>" placeholder="E-mail" disabled/>
+                <input type="tel" name="phoneNumber" id="phoneNumber" class = "input" pattern="([0-9]{3} ?){2,4}[0-9]{3}" value = "<?php echo $phoneNumber?>" placeholder="Tel. number (xxx xxx xxx)" disabled/></br>
                 <button type = "submit" id = "saveContactChanges" name = "saveContactChanges">Save</button>
             </form>
         </div>
@@ -101,14 +101,11 @@ $conn->close();
         <div id = "description">
             <button type = "button" id = "editDescriptionInfoId" class = "editDescriptionInfo" onClick = "editDescriptionInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
             <form method="POST">
-                <textarea id = "aboutMe" class = "aboutMe" name = "aboutMe" placeholder = "Something about me..." disabled><?php echo $description?></textarea>
+                <textarea id = "aboutMe" class = "input" name = "aboutMe" placeholder = "Something about me..." disabled><?php echo $description?></textarea>
                 <button type = "submit" id = "saveDescriptionChanges" name = "saveDescriptionChanges">Save</button>
             </form>
         </div>
     </div>
     <script src="script.js"></script>
-    <script>
-        
-    </script>
 </body>
 </html>
