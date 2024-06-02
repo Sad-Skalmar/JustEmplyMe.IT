@@ -1,13 +1,13 @@
-
 <div id = "slider">
         <div id = "filter"></div>
         <div id="container">
         <div id = "account">
-            <button id = "show_account_list" onclick = "showAccountList()">Sign in <i class="fa-solid fa-arrow-down"></i></button>
-            <button id = "hide_account_list" onclick = "hideAccountList()">Sign in <i class="fa-solid fa-arrow-up"></i></button>
+            <button id = "show_account_list" onclick = "showAccountList()">My account <i class="fa-solid fa-arrow-down"></i></button>
+            <button id = "hide_account_list" onclick = "hideAccountList()">My account <i class="fa-solid fa-arrow-up"></i></button>
                 <ul id = "account_list">
-                    <a href = 'sign_in.php'><li class = "list_element">Sign in</li></a>
-                    <a href = 'register.php'><li class = "list_element">Register</li></a>
+                    <a href = 'my_personal_profile.php'><li class = "list_element">My Account</li></a>
+                    <a href = 'my_applications.php'><li class = "list_element">My Applications</li></a>
+                    <a href = 'logout.php'><li class = "list_element">Log Off</li></a>
                 </ul>
         </div>
         <div id = "sort_by">

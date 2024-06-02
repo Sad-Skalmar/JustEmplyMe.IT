@@ -74,9 +74,6 @@ body{
     padding: 0.5vw;
     margin: 0vw;
 }
-#account_list {
-    height: 3.5vw;
-}
 .list_element{
     text-align: center;
     width: 7vw;

@@ -83,10 +83,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="logInContainer">
         <form method="POST" id="registrationForm">
-            <input type="text" id="username" name="username" placeholder="Username" required>
-            <input type = "email" id = "mail" name = "mail" placeholder = "E-mail" required>
-            <input type = "text" id = "companyName" name = "companyName" placeholder = "Company name" required>
-            <input type = "number" id = "tin" name = "tin" placeholder = "Tax Identification Number(TIN)" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type = "email" name = "mail" placeholder = "E-mail" required>
+            <input type = "text" name = "companyName" placeholder = "Company name" required>
+            <input type = "number" name = "tin" placeholder = "Tax Identification Number(TIN)" required>
             <input type="password" class="password" name="password" placeholder="Password" required>
             <input type="password" class="password" name="rePassword" placeholder="Re-enter password" required>
             <div id="error" style="color: red;"><?php if (isset($error)) echo $error; ?></div>

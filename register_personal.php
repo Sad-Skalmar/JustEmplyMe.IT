@@ -64,12 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div id="logInContainer">
         <form method="POST">
-            <input type="text" id="username" name="username" placeholder="Username" required>
-            <input type="text" id="name" name="name" placeholder="First and last name" required>
-            <input type="email" id="mail" name="mail" placeholder="E-mail" required>
-            <input type="number" id = "tel" name = "phone" placeholder="Phone number" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <input type="password" id="rePassword" name="rePassword" placeholder="Re-password" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="name" placeholder="First and last name" required>
+            <input type="email" name="mail" placeholder="E-mail" required>
+            <input type="number" name = "phone" pattern="([0-9]{3} ?){2,4}[0-9]{3}" placeholder="Phone number (xxx xxx xxx)" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="rePassword" placeholder="Re-password" required>
             <div id="error" style="color: red;"><?php if (isset($error)) echo $error; ?></div>
             <button type="submit" name="sign_up_button">Sign up</button>
         </form>

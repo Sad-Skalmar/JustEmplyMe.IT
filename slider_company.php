@@ -3,11 +3,12 @@
         <div id = "filter"></div>
         <div id="container">
         <div id = "account">
-            <button id = "show_account_list" onclick = "showAccountList()">Sign in <i class="fa-solid fa-arrow-down"></i></button>
-            <button id = "hide_account_list" onclick = "hideAccountList()">Sign in <i class="fa-solid fa-arrow-up"></i></button>
+            <button id = "show_account_list" onclick = "showAccountList()">My account <i class="fa-solid fa-arrow-down"></i></button>
+            <button id = "hide_account_list" onclick = "hideAccountList()">My acount <i class="fa-solid fa-arrow-up"></i></button>
                 <ul id = "account_list">
-                    <a href = 'sign_in.php'><li class = "list_element">Sign in</li></a>
-                    <a href = 'register.php'><li class = "list_element">Register</li></a>
+                    <a href = 'my_company_profile.php'><li class = "list_element">My Account</li></a>
+                    <a href = 'my_job_offers.php'><li class = "list_element">My Job Offers</li></a>
+                    <a href = 'logout.php'><li class = "list_element">Log Off</li></a>
                 </ul>
         </div>
         <div id = "sort_by">
@@ -69,4 +70,9 @@
                 ');
             }
         ?>
+        <a href = "add_offer.php"><div id = "add_offer">
+            <div class = "add_offer_button"><i class="fa-solid fa-plus"></i></div>
+            <div class = "add_offer_text">Add your own offer!</div>
+        </div>
+        </a>
     </div>

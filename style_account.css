@@ -160,7 +160,7 @@ img {
     margin-left: 11vw;
     width: 30vw;
 }
-#name {
+#mainInfo #name {
     font-size: 1vw;
 }
 #work {
