@@ -57,7 +57,7 @@ a {
     text-decoration: none;
     color: black;
 }
-.fa-person, .fa-building{
+#companyAccount .fa-person, #companyAccount .fa-building{
     font-size: 4vw;
 }
 /*registration style ends */
@@ -90,6 +90,53 @@ li:hover{
     transition: ease 0.5s;
 }
 /*Navigation sidebar section ends*/
+
+
+/*job offers sections starts*/
+#job_offers{
+    width: 36vw;
+    height: 38vw;
+    margin-left: 15vw;
+    overflow-y:auto;
+    padding: 0.1vw 1vw 1vw 1vw;
+    border-radius: 11px;
+}
+#job_offer{
+    background-color: #ffffff;
+    width: 33vw;
+    height: 5vw;
+    border-radius: 11px;
+    margin-bottom: 1vw;
+    padding: 1vw;
+    box-shadow: 1px 1px 3px black;
+}
+#job_offer:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 5px black;
+}
+#job_name{
+    margin-left: 3.5vw;
+    font-size: 1.5vw;
+}
+#company_name, #job_location, #workplace, #date{
+    float: left;
+    margin-left: 3.5vw;
+    margin-top: 2vw;
+}
+.fa-building, .fa-location-dot, .fa-globe{
+    margin-right: 0.5vw;
+}
+#noOffers{
+    background-color: #ffffff;
+    width: 33vw;
+    height: 5vw;
+    border-radius: 11px;
+    margin-top: 10vw;
+    text-align: center;
+    padding: 1vw;
+    box-shadow: 1px 1px 3px black;
+}
+/*job offers sections ends*/
 
 
 /*Settings sections starts*/

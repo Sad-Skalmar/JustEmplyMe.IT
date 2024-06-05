@@ -1,6 +1,14 @@
 <?php
 include('database.php');
+session_start();
 
+/* Checking if user is logged in */
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
 $job_name = $_POST['job_name'] ?? '';
 $company_name = $_POST['company_name'] ?? '';
 $localization = $_POST['localization'] ?? '';
@@ -11,13 +19,13 @@ $min_salary = $_POST['min_salary'] ?? '';
 $max_salary = $_POST['max_salary'] ?? '';
 $description = $_POST['description'] ?? '';
 $date = date("Y-m-d");
-
+$job_owner_id = $_SESSION['user_id'];
 $salary_preview = ($max_salary == 0) ? $min_salary . " PLN" : $min_salary . " - " . $max_salary . " PLN";
 
 if (isset($_POST['button_submit'])) {
-    $query = "INSERT INTO offers (`name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `description`, `experience`, `type`) 
-              VALUES ('$job_name', '$min_salary', '$max_salary', '$company_name', '$localization', '$workplace', '$date', '$description', '$experience', '$type')";
-    if ($conn->query($query) === TRUE) {
+    $queryInsert = $conn->prepare("INSERT INTO offers (`name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `description`, `experience`, `type`, `job_owner_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $queryInsert->bind_param("siisssssssi", $job_name, $min_salary, $max_salary, $company_name, $localization, $workplace, $date, $description, $experience, $type, $job_owner_id);
+    if ($queryInsert->execute()) {
         header("Location: index.php");
         exit();
     } else {
@@ -76,7 +84,7 @@ if (isset($_POST['button_submit'])) {
                 </div>
                 <div class="job_offer_page_footer_workplace">
                     <h2 class="footer_level_text">Workplace:</h2>
-                    <input type="text" class="footer_level_subtext" value="<?= $workplace ?>" readonly name = "experience" ></input>
+                    <input type="text" class="footer_level_subtext" value="<?= $workplace ?>" readonly name = "workplace" ></input>
                 </div>
             </div>
             <input type="hidden" name="min_salary" value="<?= $min_salary ?>"></input>

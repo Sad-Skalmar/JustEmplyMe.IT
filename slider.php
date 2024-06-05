@@ -55,7 +55,7 @@
                             <h2 class = "company_name_text"><i class="fa-sharp fa-regular fa-building"></i>'.$row_job_offer["company"].'</h2>
                         </div>
                         <div class = "location">
-                            <h2 class = "location_text"><i class="fa-solid fa-location-dot"></i></i>'.$row_job_offer["location"].'</h2>
+                            <h2 class = "location_text"><i class="fa-solid fa-location-dot"></i>'.$row_job_offer["location"].'</h2>
                         </div>
                         <div class = "workplace">
                             <h2 class = "workplace_text"><i class="fa-solid fa-globe"></i>'.$row_job_offer["workplace"].'</h2>

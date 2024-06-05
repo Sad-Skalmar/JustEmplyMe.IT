@@ -1,3 +1,24 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: index.php");
+        exit();
+    } else {
+        include 'database.php';
+        $stmt = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
+        $stmt->bind_param("i", $_SESSION['user_id']);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($company_name);
+        $stmt->fetch();
+        
+        if (empty($company_name)) {
+            header("Location: index.php");
+            exit();
+        }
+    }
+?>
 <head>
         <meta charset = "UTF-8"/>
         <title>Add offer</title>
@@ -15,18 +36,15 @@
         <form action = "add_offer_2.php" method = "POST" id = "form">
         <button type = "submit" class = "button_next">Next</button><br><br>
             <div class = "company_name">
-                <label class = "label_text">Company name</label>
-                <input type = "text" class = "form_text_box company" name = "company_name" autocomplete="off" required></input>
+                <input type = "text" class = "form_text_box company" name = "company_name" autocomplete="off" placeholder="Company name" value = "<?php echo $company_name?>" required></input>
             </div>
 
             <div class = "localization">
-                <label class = "label_text">Localization</label>
-                <input type = "text" class = "form_text_box loc" name = "localization" autocomplete="off" required></input>
+                <input type = "text" class = "form_text_box loc" name = "localization" autocomplete="off" placeholder="Localization" required></input>
             </div>
             
             <div class = "job_name">
-                <label class = "label_text">Job Title</label>
-                <input type = "text" class = "form_text_box title" name = "job_name" autocomplete="off" required></input>
+                <input type = "text" class = "form_text_box title" name = "job_name" autocomplete="off" placeholder="Job title" required></input>
             </div>  
 
             <div class = "experience">
