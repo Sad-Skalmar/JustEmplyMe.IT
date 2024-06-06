@@ -90,3 +90,25 @@ input:hover{
     margin-left: 12vw;
     margin-top: -1.2vw;
 }
+#applyButton {
+    width: 40vw;
+    height: 5vw;
+    font-size: 1.5vw;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#applyButton:hover {
+    background-color: #0056b3;
+    transition: ease 0.5s;
+}
+.applyresault{
+    color: #48BB78;
+    font-size: 1vw;
+    width: 40vw;
+    text-align: center;
+}
+
