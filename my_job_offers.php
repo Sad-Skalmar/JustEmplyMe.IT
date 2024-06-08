@@ -29,6 +29,17 @@
                 header("Location: sign_in.php");
                 exit();
             }
+
+            $queryCheckingProfileType = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
+            $queryCheckingProfileType->bind_param("i", $_SESSION['user_id']);
+            $queryCheckingProfileType->execute();
+            $queryCheckingProfileType->store_result();
+            $queryCheckingProfileType->bind_result($company_name);
+            $queryCheckingProfileType->fetch();
+            if (empty($company_name)) {
+                header("location: my_applications.php");
+            }
+            $queryCheckingProfileType->close();
             
             $user_id = $_SESSION['user_id'];
             $querySelectInfo = $conn -> prepare("SELECT `name`, `company`, `location`, `workplace`, `date` from offers where job_owner_id = ?");
@@ -44,23 +55,23 @@
             $numberOfRows = $querySelectInfo->num_rows;
             if($numberOfRows<1){
                 echo('<div id = "noOffers"><label>U dont have any job offers posted</label></div>');
-            }
-            while ($querySelectInfo->fetch()) {
-                $todayDate = date_create(date("Y-m-d"));
-                $uploadDate = date_create($date);
-                $dateDiff = date_diff($todayDate, $uploadDate);
+            }else{
+                while ($querySelectInfo->fetch()) {
+                    $todayDate = date_create(date("Y-m-d"));
+                    $uploadDate = date_create($date);
+                    $dateDiff = date_diff($todayDate, $uploadDate);
 
-                echo('
-                <div id="job_offer">
-                    <div id="job_name">'.$name.'</div>
-                    <div id="company_name"><i class="fa-sharp fa-regular fa-building"></i>'.$company.'</div>
-                    <div id="job_location"><i class="fa-solid fa-location-dot"></i>'.$location.'</div>
-                    <div id="workplace"><i class="fa-solid fa-globe"></i>'.$workplace.'</div>
-                    <div id="date">'.$dateDiff->format("%a days ago").'</div>
-                </div>
-                ');
+                    echo('
+                    <div id="job_offer">
+                        <div id="job_name">'.$name.'</div>
+                        <div id="company_name"><i class="fa-sharp fa-regular fa-building"></i>'.$company.'</div>
+                        <div id="job_location"><i class="fa-solid fa-location-dot"></i>'.$location.'</div>
+                        <div id="workplace"><i class="fa-solid fa-globe"></i>'.$workplace.'</div>
+                        <div id="date">'.$dateDiff->format("%a days ago").'</div>
+                    </div>
+                    ');
             }
-
+        }
             $querySelectInfo->close();
             $conn->close();
             ?>

@@ -6,12 +6,12 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     include 'database.php';
     
-    $stmt = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
-    $stmt->bind_param("i", $_SESSION['user_id']);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($company_name);
-    $stmt->fetch();
+    $queryCheckingProfileType = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
+    $queryCheckingProfileType->bind_param("i", $_SESSION['user_id']);
+    $queryCheckingProfileType->execute();
+    $queryCheckingProfileType->store_result();
+    $queryCheckingProfileType->bind_result($company_name);
+    $queryCheckingProfileType->fetch();
     
     if (!empty($company_name)) {
         $destination = "slider_company.php";
@@ -19,7 +19,7 @@ if (!isset($_SESSION['user_id'])) {
         $destination = "slider_personal.php";
     }
     
-    $stmt->close();
+    $queryCheckingProfileType->close();
     $conn->close();
 }
 ?>

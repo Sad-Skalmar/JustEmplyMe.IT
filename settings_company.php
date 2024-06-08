@@ -8,6 +8,19 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+/*checking profile type, if wrong send to right adress*/
+$queryCheckingProfileType = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
+$queryCheckingProfileType->bind_param("i", $_SESSION['user_id']);
+$queryCheckingProfileType->execute();
+$queryCheckingProfileType->store_result();
+$queryCheckingProfileType->bind_result($company_name);
+$queryCheckingProfileType->fetch();
+
+if (empty($company_name)) {
+    header("location: settings_personal.php");
+}
+$queryCheckingProfileType->close();
+
 $user_id = $_SESSION['user_id'];
 $error = '';
 $success = '';

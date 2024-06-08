@@ -45,7 +45,7 @@
     $SelectJobInfoQuery->fetch();
     $SelectJobInfoQuery->close();
 
-    if(@$row_job_page['max_salary'] == 0){
+    if(@$max_salary == 0){
         @$salary = $min_salary." PLN";
     }else{
         @$salary = $min_salary." - ".$max_salary." PLN";

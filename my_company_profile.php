@@ -2,58 +2,77 @@
 include 'database.php';
 session_start();
 
+/*Checking if user is logged in*/
 if (!isset($_SESSION['user_id'])) {
     header("Location: sign_in.php");
     exit();
 }
 
+/*checking profile type, if wrong send to right adress*/
+$queryCheckingProfileType = $conn->prepare("SELECT `company_name` FROM users WHERE id = ?");
+$queryCheckingProfileType->bind_param("i", $_SESSION['user_id']);
+$queryCheckingProfileType->execute();
+$queryCheckingProfileType->store_result();
+$queryCheckingProfileType->bind_result($company_name);
+$queryCheckingProfileType->fetch();
+
+if (empty($company_name)) {
+    header("location: my_personal_profile.php");
+}
+$queryCheckingProfileType->close();
+
+/*Getting logged user's id*/
 $user_id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT `company_name`, `work`, `tin`, `mail`, `phone`, `description` FROM users WHERE id = ?");
-if ($stmt === false) {
+/*Selecting info about user*/
+$queryGetInfo = $conn->prepare("SELECT `company_name`, `work`, `tin`, `mail`, `phone`, `description` FROM users WHERE id = ?");
+if ($queryGetInfo === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$stmt->bind_result($name, $work, $birthDate, $email, $phoneNumber, $description);
-$stmt->fetch();
-$stmt->close();
+/*Binding query results to variables*/
+$queryGetInfo->bind_param("i", $user_id);
+$queryGetInfo->execute();
+$queryGetInfo->bind_result($name, $work, $birthDate, $email, $phoneNumber, $description);
+$queryGetInfo->fetch();
+$queryGetInfo->close();
 
+/*Checking if forms are submitted*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['saveMainChanges'])) {
         $name = $_POST['name'] ?? '';
         $birth = $_POST['birthDate'] ?? '';
         $status = $_POST['work'] ?? '';
 
-        $stmt = $conn->prepare("UPDATE users SET company_name = ?, work = ?, birthdate = ? WHERE id = ?");
-        if ($stmt === false) {
+        $queryGetInfo = $conn->prepare("UPDATE users SET company_name = ?, work = ?, birthdate = ? WHERE id = ?");
+        if ($queryGetInfo === false) {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
-        $stmt->bind_param("sssi", $name, $status, $birth, $user_id);
-        $stmt->execute();
-        $stmt->close();
+        $queryGetInfo->bind_param("sssi", $name, $status, $birth, $user_id);
+        $queryGetInfo->execute();
+        $queryGetInfo->close();
     } elseif (isset($_POST['saveContactChanges'])) {
         $mail = $_POST['mail'] ?? '';
         $phone = $_POST['phoneNumber'] ?? '';
 
-        $stmt = $conn->prepare("UPDATE users SET mail = ?, phone = ? WHERE id = ?");
-        if ($stmt === false) {
+        $queryGetInfo = $conn->prepare("UPDATE users SET mail = ?, phone = ? WHERE id = ?");
+        if ($queryGetInfo === false) {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
-        $stmt->bind_param("ssi", $mail, $phone, $user_id);
-        $stmt->execute();
-        $stmt->close();
+        $queryGetInfo->bind_param("ssi", $mail, $phone, $user_id);
+        $queryGetInfo->execute();
+        $queryGetInfo->close();
     } elseif (isset($_POST['saveDescriptionChanges'])) {
         $aboutMe = $_POST['aboutMe'] ?? '';
 
-        $stmt = $conn->prepare("UPDATE users SET description = ? WHERE id = ?");
-        if ($stmt === false) {
+        $queryGetInfo = $conn->prepare("UPDATE users SET description = ? WHERE id = ?");
+        if ($queryGetInfo === false) {
             die('Prepare failed: ' . htmlspecialchars($conn->error));
         }
-        $stmt->bind_param("si", $aboutMe, $user_id);
-        $stmt->execute();
-        $stmt->close();
+        $queryGetInfo->bind_param("si", $aboutMe, $user_id);
+        $queryGetInfo->execute();
+        $queryGetInfo->close();
     }
+    /*Refreshing the site*/
     header("Refresh:0");
 }
 
