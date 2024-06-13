@@ -1,53 +1,25 @@
-function showSortList(){
+function toggleSortList() {
     var list = document.getElementById("sort_list");
-    var show_button = document.getElementById("show_sort_list");
-    var hide_button = document.getElementById("hide_sort_list");
-    list.style.display = "block";
-    setTimeout(function() { 
-        list.style.color = "black";
-    }, 50);
-    show_button.style.display = "none";
-    hide_button.style.display = "block";
-    list.style.animation = "show_sidebar 0.3s";
-}
-
-function hideSortList(){
-    var list = document.getElementById("sort_list");
-    var show_button = document.getElementById("show_sort_list");
-    var hide_button = document.getElementById("hide_sort_list");
-    list.style.animation = "hide_sidebar 0.3s";
-    setTimeout(function() { 
+    var icon = document.getElementById("toggleSortIcon");
+    if (list.style.display === "none" || list.style.display === "") {
+        list.style.display = "block";
+        icon.textContent = "arrow_drop_up";
+    } else {
         list.style.display = "none";
-        list.style.color = "#ffffff";
-        hide_button.style.display = "none";
-        show_button.style.display = "block";    
-    }, 300);
+        icon.textContent = "arrow_drop_down";
+    }
 }
 
-function showAccountList(){
+function toggleAccountList() {
     var list = document.getElementById("account_list");
-    var show_button = document.getElementById("show_account_list");
-    var hide_button = document.getElementById("hide_account_list");
-    list.style.display = "block";
-    setTimeout(function() { 
-        list.style.color = "black";
-    }, 50);
-    show_button.style.display = "none";
-    hide_button.style.display = "block";
-    list.style.animation = "show_sidebar 0.3s";
-}
-
-function hideAccountList(){
-    var list = document.getElementById("account_list");
-    var show_button = document.getElementById("show_account_list");
-    var hide_button = document.getElementById("hide_account_list");
-    list.style.animation = "hide_sidebar 0.3s";
-    setTimeout(function() { 
+    var icon = document.getElementById("toggleAccountIcon");
+    if (list.style.display === "none" || list.style.display === "") {
+        list.style.display = "block";
+        icon.textContent = "arrow_drop_up";
+    } else {
         list.style.display = "none";
-        list.style.color = "#ffffff";
-        hide_button.style.display = "none";
-        show_button.style.display = "block";    
-    }, 300);
+        icon.textContent = "arrow_drop_down";
+    }
 }
 
 function fixedPosition(){
@@ -196,4 +168,27 @@ descriptionInfoOver.addEventListener('mouseout', () => {
         descriptionButton.style.display = "none";
     }
 });
+
+function toggleApplicationInfo(job_id) {
+    var infoDiv = document.getElementById("applicationInfo_" + job_id);
+    var icon = document.getElementById("toggleIcon_" + job_id);
+    if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
+        infoDiv.style.display = "block";
+        icon.textContent = "arrow_drop_up";
+        
+        function changeStatusBackground(applicationId){
+        var status = document.getElementById("statusText_" + applicationId);
+        if (status.textContent.trim() === "Pending") {
+            status.style.backgroundColor = "#ffcc99";
+        }else if(status.textContent.trim() === "Accepted"){
+            status.style.backgroundColor = "#93dfb2";
+        }else if(status.textContent.trim() === "Declined"){
+            status.style.backgroundColor = "#ef010946";
+        }
+    }
+    } else {
+        infoDiv.style.display = "none";
+        icon.textContent = "arrow_drop_down";
+    }
+}
 

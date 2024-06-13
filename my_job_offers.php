@@ -8,7 +8,8 @@
     <meta charset="UTF-8"/>
     <title>Job Market - My job offers</title>
     <link rel="stylesheet" href="style_account.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src = "script.js"></script>
 </head>
 <body>
     <div id="account">
@@ -21,7 +22,7 @@
         </div>
         
         <div id = "job_offers">
-            <?php 
+        <?php 
             include 'database.php';
             session_start();
             
@@ -42,36 +43,71 @@
             $queryCheckingProfileType->close();
             
             $user_id = $_SESSION['user_id'];
-            $querySelectInfo = $conn -> prepare("SELECT `name`, `company`, `location`, `workplace`, `date` from offers where job_owner_id = ?");
+            $querySelectInfo = $conn->prepare("SELECT DISTINCT offers.job_id, `name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `type` FROM offers WHERE offers.job_owner_id = ?");
             if ($querySelectInfo === false) {
                 die('Prepare failed: ' . htmlspecialchars($conn->error));
             }
+
             $querySelectInfo->bind_param("i", $user_id);
             $querySelectInfo->execute();
-            $querySelectInfo->bind_result($name, $company, $location, $workplace, $date);
+            $querySelectInfo->bind_result($job_id, $job_name, $min_salary, $max_salary, $company_name, $location, $workplace, $date, $type);
             $querySelectInfo->store_result();
-            $querySelectInfo->fetch();
-
+            
             $numberOfRows = $querySelectInfo->num_rows;
-            if($numberOfRows<1){
-                echo('<div id = "noOffers"><label>U dont have any job offers posted</label></div>');
-            }else{
+            if($numberOfRows < 1){
+                echo('<div id="noOffers"><label>You don\'t have any job offers posted</label></div>');
+            } else {
                 while ($querySelectInfo->fetch()) {
+                    if ($max_salary == 0) {
+                        $salary = $min_salary . " PLN";
+                    } else {
+                        $salary = $min_salary . " - " . $max_salary . " PLN";
+                    }
                     $todayDate = date_create(date("Y-m-d"));
                     $uploadDate = date_create($date);
-                    $dateDiff = date_diff($todayDate, $uploadDate);
-
+                    $finalDate = date_diff($todayDate, $uploadDate);
+    
                     echo('
-                    <div id="job_offer">
-                        <div id="job_name">'.$name.'</div>
-                        <div id="company_name"><i class="fa-sharp fa-regular fa-building"></i>'.$company.'</div>
-                        <div id="job_location"><i class="fa-solid fa-location-dot"></i>'.$location.'</div>
-                        <div id="workplace"><i class="fa-solid fa-globe"></i>'.$workplace.'</div>
-                        <div id="date">'.$dateDiff->format("%a days ago").'</div>
-                    </div>
+                    <a href="offer.php?id='.$job_id.'">
+                        <div id="job_offer">
+                            <div class="job_name">'.$job_name.'</div>
+                            <div class="salary">'.$salary.'</div>
+                            <div class="company_name"><i class="material-icons">apartment</i>'.$company_name.'</div>
+                            <div class="job_location"><i class="material-icons">location_on</i>'.$location.'</div>
+                            <div class="workplace"><i class="material-icons">public</i>'.$workplace.'</div>
+                            <div class="date">'.$finalDate->format("%a days ago").'</div>
+                        </a>
+                            <div class="applicationInfoButton" onclick="toggleApplicationInfo('.$job_id.')">Applicant list <i class="material-icons" id="toggleIcon_'.$job_id.'">arrow_drop_down</i></div>
+                        </div>
+                    <div id="applicationInfo_'.$job_id.'" class="applicationInfo" style="display: none;">
                     ');
+
+                    $queryApplicantInfo = $conn->prepare("SELECT `name`,applications.application_id, applications.user_id, applications.status, applications.application_date FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.job_id = ?");
+                    if ($queryApplicantInfo === false) {
+                        die('Prepare failed: ' . htmlspecialchars($conn->error));
+                    }
+                    $queryApplicantInfo->bind_param("i", $job_id);
+                    $queryApplicantInfo->execute();
+                    $queryApplicantInfo->bind_result($applicantName, $applicationId, $applicantId, $status, $applicationDate);
+                    $queryApplicantInfo->store_result();
+                    if($queryApplicantInfo->num_rows < 1){
+                        echo '<div class="noApplicants">No one has applied for this job yet.</div>';
+                    }else{
+                    while ($queryApplicantInfo->fetch()) {
+                        echo('
+                        <div class="applicationDate">Application date: <br>'.$applicationDate.'</div>
+                        <div class="applicationName">Applicant Name: <a href = "profile.php?id='.$applicantId.'"><br>'.$applicantName.'</div></a>
+                        <div class="applicationCV"><a target = "_blank" href = "Konrad Hościło - CV PL.pdf"?forcedownload=1>Download Applicant Resume</a></div>
+                        <div class="applicationStatusChange">Status: <p id="statusText_'.$job_id.'" class = "statusText">'.$status.'</p></div>
+                        ');
+                    }
+                }
+
+                    echo('</div>');
+                    $queryApplicantInfo->close();
+                }
             }
-        }
+            
             $querySelectInfo->close();
             $conn->close();
             ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2024 at 01:47 AM
+-- Generation Time: Jun 13, 2024 at 07:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,6 +34,17 @@ CREATE TABLE `applications` (
   `application_date` date DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `applications`
+--
+
+INSERT INTO `applications` (`application_id`, `user_id`, `job_id`, `application_date`, `status`) VALUES
+(23, 16, 15, '2024-06-06', 'Accepted'),
+(24, 16, 21, '2024-06-06', 'Pending'),
+(25, 16, 18, '2024-06-07', 'Declined'),
+(26, 13, 17, '2024-06-07', 'Pending'),
+(27, 16, 17, '2024-06-11', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -135,13 +146,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `application_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `job_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -1,14 +1,11 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="PL">
 <head>
     <meta charset="UTF-8"/>
     <title>Job Market - My applications</title>
     <link rel="stylesheet" href="style_account.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src = "script.js"></script>
 </head>
 <body>
     <div id="account">
@@ -20,7 +17,7 @@
             </ul>
         </div>
         
-        <div id = "job_offers">
+        <div id="job_offers">
             <?php 
             include 'database.php';
             session_start();
@@ -44,19 +41,19 @@
 
 
             $user_id = $_SESSION['user_id'];
-            $querySelectInfo = $conn -> prepare("SELECT `name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `description`, `experience`, `type` FROM offers INNER JOIN applications ON offers.job_id = applications.job_id WHERE applications.user_id = ?");
+            $querySelectInfo = $conn -> prepare("SELECT offers.job_id, `name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `type`, applications.status, applications.application_date FROM offers INNER JOIN applications ON offers.job_id = applications.job_id WHERE applications.user_id = ?");
             if ($querySelectInfo === false) {
                 die('Prepare failed: '.$conn->error);
             }
             $querySelectInfo->bind_param("i", $user_id);
             $querySelectInfo->execute();
-            $querySelectInfo->bind_result($job_name, $min_salary, $max_salary, $company_name, $location, $workplace, $date, $description, $experience, $type);
+            $querySelectInfo->bind_result($job_id, $job_name, $min_salary, $max_salary, $company_name, $location, $workplace, $date, $type, $status, $applicationDate);
             $querySelectInfo->store_result();
             
 
             $numberOfRows = $querySelectInfo->num_rows;
             if($numberOfRows<1){
-                echo('<div id = "noOffers"><label>U dont have any applications</label></div>');
+                echo('<div id="noOffers"><label>You don\'t have any applications</label></div>');
             }else{
                 while ($querySelectInfo->fetch()) {
                 if($max_salary == 0){
@@ -69,12 +66,20 @@
                 $finalDate = date_diff($todayDate, $uploadDate);
 
                 echo('
+                <a href = "offer.php?id='.$job_id.'">
                 <div id="job_offer">
-                    <div id="job_name">'.$job_name.'</div>
-                    <div id="company_name"><i class="fa-sharp fa-regular fa-building"></i>'.$company_name.'</div>
-                    <div id="job_location"><i class="fa-solid fa-location-dot"></i>'.$location.'</div>
-                    <div id="workplace"><i class="fa-solid fa-globe"></i>'.$workplace.'</div>
-                    <div id="date">'.$finalDate->format("%a days ago").'</div>
+                    <div class="job_name">'.$job_name.'</div>
+                    <div class="salary">'.$salary.'</div>
+                    <div class="company_name"><i class="material-icons">apartment</i>'.$company_name.'</div>
+                    <div class="job_location"><i class="material-icons">location_on</i>'.$location.'</div>
+                    <div class="workplace"><i class="material-icons">public</i>'.$workplace.'</div>
+                    <div class="date">'.$finalDate->format("%a days ago").'</div>
+                </a>
+                    <div class = "applicationInfoButton" onclick="toggleApplicationInfo('.$job_id.')">Application info <i class="material-icons" id="toggleIcon_'.$job_id.'">arrow_drop_down</i></div>
+                </div>
+                <div id="applicationInfo_'.$job_id.'" class="applicationInfo">
+                    <div class="applicationDate">Application date: <br>'.$applicationDate.'</div>
+                    <div class="applicationStatus">Status: <p id="statusText_'.$job_id.'" class = "statusText">'.$status.'</p></div>
                 </div>
                 ');
             }
@@ -85,3 +90,5 @@
             ?>
         </div>
     </div>
+</body>
+</html>

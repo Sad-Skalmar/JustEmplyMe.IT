@@ -57,7 +57,7 @@ a {
     text-decoration: none;
     color: black;
 }
-#companyAccount .fa-person, #companyAccount .fa-building{
+#personalAccount .material-icons, #companyAccount .material-icons{
     font-size: 4vw;
 }
 /*registration style ends */
@@ -95,7 +95,7 @@ li:hover{
 /*job offers sections starts*/
 #job_offers{
     width: 43vw;
-    height: 38vw;
+    height: 39vw;
     margin-left: 11vw;
     overflow-y:auto;
     padding: 0.1vw 1vw 1vw 1vw;
@@ -104,7 +104,7 @@ li:hover{
 #job_offer{
     background-color: #ffffff;
     width: 40vw;
-    height: 5vw;
+    height: 9vw;
     border-radius: 11px;
     margin-bottom: 1vw;
     padding: 1vw;
@@ -114,18 +114,74 @@ li:hover{
     cursor: pointer;
     box-shadow: 1px 1px 5px black;
 }
-#job_name{
+.job_name{
     margin-left: 2vw;
     font-size: 1.5vw;
 }
-#company_name, #job_location, #workplace, #date{
+
+.salary{
+    width: 9vw;
+    margin-left: 2vw;
+    color: #48BB78;
+    line-height: 2vw;
+    font-size: 1vw;
+}
+.company_name, .job_location, .workplace, .date{
     width: 8vw;
     float: left;
     margin-left: 2vw;
-    margin-top: 2vw;
+    margin-top: 1.5vw;
+    display: flex;
+    align-items: center;
 }
-.fa-building, .fa-location-dot, .fa-globe{
+.company_name .material-icons, .job_location .material-icons, .workplace .material-icons{
     margin-right: 0.5vw;
+}
+/*applications info for applicants*/
+.applicationInfoButton{
+    float: left;
+    width: 7.1vw;
+    height: 1vw;
+    padding: 0.5vw;
+    border: 1px solid #d8d3d3;
+    border-radius: 11px;
+    margin: 1vw 0 0 30.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.applicationInfoButton:hover{
+    background-color: #A9A9A9;
+    transition: ease 0.5s;
+}
+.applicationInfo{
+    display: none;
+    background-color: #ffffff;
+    width: 40vw;
+    border-radius: 11px;
+    margin-bottom: 1vw;
+    padding: 1vw;
+    box-shadow: 1px 1px 3px black;
+    overflow: hidden;
+}
+.applicationInfo p{
+    margin: 0;
+}
+.applicationDate{
+    margin-left: 2vw;
+    float: left;
+    width: 7vw;
+}
+.applicationStatus{
+    text-align: center;
+    float: left;
+    margin-left: 23.5vw;
+}
+.statusText{
+    text-align: center;
+    width: 4vw;
+    padding: 0.3vw;
+    border-radius: 11px;
 }
 #noOffers{
     background-color: #ffffff;
@@ -137,6 +193,29 @@ li:hover{
     padding: 1vw;
     box-shadow: 1px 1px 3px black;
 }
+/*applications info for applicants ends*/
+
+/*applications info for company starts*/
+.applicationName, .applicationPhone, .applicationCV, .applicationStatusChange{
+    text-align: center;
+    float: left;
+    width: 9vw;
+    margin-left: 2.5vw;
+    margin-bottom: 1.5vw;
+}
+.applicationStatusChange{
+    width: 4.5vw;
+}
+.applicationName:hover, .applicationCV:hover {
+    a{
+        text-decoration: underline;
+    }
+}
+.noApplicants{
+    text-align: center;
+}
+/*applications info for company ends*/
+
 /*job offers sections ends*/
 
 
