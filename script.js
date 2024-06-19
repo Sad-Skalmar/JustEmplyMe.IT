@@ -179,22 +179,25 @@ function toggleApplicationInfo(job_id) {
     if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
         infoDiv.style.display = "block";
         icon.textContent = "arrow_drop_up";
-        
-        function changeStatusBackground(applicationId){
-        var status = document.getElementById("statusText_" + applicationId);
-        if (status.textContent.trim() === "Pending") {
-            status.style.backgroundColor = "#ffcc99";
-        }else if(status.textContent.trim() === "Accepted"){
-            status.style.backgroundColor = "#93dfb2";
-        }else if(status.textContent.trim() === "Declined"){
-            status.style.backgroundColor = "#ef010946";
+        var statusElements = infoDiv.getElementsByClassName("statusText");
+        for (var i = 0; i < statusElements.length; i++) {
+            var status = statusElements[i];
+            if (status.textContent.trim() === "Pending") {
+                status.style.backgroundColor = "#ffcc99";
+            } else if (status.textContent.trim() === "Accepted") {
+                status.style.backgroundColor = "#93dfb2";
+            } else if (status.textContent.trim() === "Declined") {
+                status.style.backgroundColor = "#ef010946";
+            }
         }
-    }
     } else {
         infoDiv.style.display = "none";
         icon.textContent = "arrow_drop_down";
     }
 }
+
+
+
 
 function toggleDeleteOverlay(job_id) {
     var questionBox = document.getElementById('deleteOfferBox_' + job_id);

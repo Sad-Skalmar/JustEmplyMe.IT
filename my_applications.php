@@ -65,9 +65,18 @@
                 $uploadDate = date_create($date);
                 $finalDate = date_diff($todayDate, $uploadDate);
 
-                echo('
+                echo'
                 <a href = "offer.php?id='.$job_id.'">
                 <div id="job_offer">
+                    <form method="POST">
+                        <div id="deleteOfferBox_' . $job_id . '" class="deleteOfferBox">
+                            <p class="deleteOfferQuestion">Are you sure you want to delete your application?</p>
+                            <button type="submit" name="deleteOfferButton_' . $job_id . '">Yes</button>
+                            <button type="button" onclick="toggleDeleteOverlay(' . $job_id . ')">No</button>
+                        </div>
+                    </form>
+                    <div class="deleteOfferButton" onclick="toggleDeleteOverlay(' . $job_id . ')"><i class="material-icons">close</i></div>
+                    <a href="offer.php?id=' . $job_id . '">
                     <div class="job_name">'.$job_name.'</div>
                     <div class="salary">'.$salary.'</div>
                     <div class="company_name"><i class="material-icons">apartment</i>'.$company_name.'</div>
@@ -81,7 +90,7 @@
                     <div class="applicationDate">Application date: <br>'.$applicationDate.'</div>
                     <div class="applicationStatus">Status: <p id="statusText_'.$job_id.'" class = "statusText">'.$status.'</p></div>
                 </div>
-                ');
+                </a>';
             }
         }
 
