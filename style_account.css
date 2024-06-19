@@ -96,8 +96,8 @@ li:hover{
 #job_offers{
     width: 43vw;
     height: 39vw;
-    margin-left: 11vw;
-    overflow-y:auto;
+    margin-left: 12vw;
+    overflow-y: auto;
     padding: 0.1vw 1vw 1vw 1vw;
     border-radius: 11px;
 }
@@ -117,7 +117,6 @@ li:hover{
     margin-left: 2vw;
     font-size: 1.5vw;
 }
-
 .salary{
     width: 9vw;
     margin-left: 2vw;
@@ -137,21 +136,24 @@ li:hover{
     margin-right: 0.5vw;
 }
 .deleteOfferButton {
-    padding: 5px 10px;
+    padding: 0.4vw 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #cc0000;
     margin-left: 39.7vw;
     border-radius: 11px;
 }
 .deleteOfferButton:hover{
-    background-color: #a01313f8;
+    background-color: #a013138a;
+    transition: ease 0.5s;
 }
 .deleteOfferBox{
     text-align: center;
     position: absolute;
-    padding-top: 17vw;
-    width: 43vw;
-    height: 23vw;
-    z-index: 1;
+    z-index: 100;
+    width: 42vw;
+    height: 13vw;
     border-radius: 11px;
     backdrop-filter: blur(2px);
     display: none;
@@ -437,7 +439,7 @@ input {
     border-radius: 4px;
 }
 button {
-    padding: 10px 20px;
+    padding: 0.4vw 1vw;
     background-color: #007bff;
     color: #ffffff;
     border: none;

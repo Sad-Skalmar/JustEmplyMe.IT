@@ -55,13 +55,6 @@
             
             $numberOfRows = $querySelectInfo->num_rows;
             echo('
-            <form method = "POST">
-                <div id = "deleteOfferBox_'.$job_id.'" class = "deleteOfferBox">
-                    <p class = "deleteOfferQuestion">Are you sure you want to delete that offer?</p>
-                    <button type = "submit" name = "deleteOfferButton_'.$job_id.'">Yes</button>
-                    <button type = "submit" onclick = "toggleDeleteOverlay('.$job_id.')">No</button>
-                </div>
-            </form>
             ');
             if($numberOfRows < 1){
                 echo('<div id="noOffers"><label>You don\'t have any job offers posted</label></div>');
@@ -78,6 +71,13 @@
     
                     echo('
                         <div id="job_offer">
+                            <form method = "POST">
+                                <div id = "deleteOfferBox_'.$job_id.'" class = "deleteOfferBox">
+                                    <p class = "deleteOfferQuestion">Are you sure you want to delete that offer?</p>
+                                    <button type = "submit" name = "deleteOfferButton_'.$job_id.'">Yes</button>
+                                    <button type = "submit" onclick = "toggleDeleteOverlay('.$job_id.')">No</button>
+                                </div>
+                            </form>
                             <div class = "deleteOfferButton" onclick = "toggleDeleteOverlay('.$job_id.')"><i class = "material-icons">close</i></div>
                             <a href="offer.php?id='.$job_id.'">
                             <div class="job_name">'.$job_name.'</div>
@@ -110,7 +110,7 @@
                     while ($queryApplicantInfo->fetch()) {
                         echo('
                         <div class="applicationDate">Application date: <br>'.$applicationDate.'</div>
-                        <div class="applicationName">Applicant Name: <a href = "profile.php?id='.$applicantId.'"><br>'.$applicantName.'</div></a>
+                        <div class="applicationName">Applicant Name: <a href = "profile.php?id='.$applicantId.'" target = "_blank"><br>'.$applicantName.'</div></a>
                         <div class="applicationCV"><a target = "_blank" href = "Konrad Hościło - CV PL.pdf"?forcedownload=1>Download Applicant Resume</a></div>
                         <div class="applicationStatusChange">Status: <p id="statusText_'.$job_id.'" class = "statusText">'.$status.'</p></div>
                         ');

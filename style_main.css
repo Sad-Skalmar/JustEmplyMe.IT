@@ -103,15 +103,20 @@ body{
     cursor: pointer;
 }
 .logo {
-    width: 4.5vw;
-    height: 4.5vw;
-    border-radius: 11px;
+    margin: 0.2vw 0 0 0.2vw;
+    width: 4vw;
+    height: 4vw;
     float: left;
+    object-fit: cover;
+}
+img {
+    border-radius: 20px;
 }
 .higher_container {
+    float: left;
     width: 34vw;
     height: 2.5vw;
-    margin: 0vw 5vw 0vw 6vw; 
+    margin: 0vw 0vw 0vw 1.7vw; 
 }
 .job_name{
     width: 17vw;

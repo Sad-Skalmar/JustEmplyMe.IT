@@ -19,21 +19,22 @@
         </div>
         </div>
         <?php 
+            include("database.php");
             @$order = $_GET['sort'];
             if($order == NULL){
                $order = 'job_id';
             }
-            include("database.php");
             $queryAll = mysqli_query($conn, "SELECT * from offers order by $order");
-            $queryGetJobInfo = $conn->prepare("SELECT `job_id`, `name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `job_owner_id` from offers order by $order");
+            $queryGetJobInfo = $conn->prepare("SELECT `job_id`, `name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `job_owner_id` from offers order by ?");
             if ($queryGetJobInfo === false) {
                 die('Prepare failed: ' . htmlspecialchars($conn->error));
             }
             /*Binding query results to variables*/
-            $queryGetJobInfo->bind_result($job_id, $name, $min_salary, $max_salary, $companyName, $location, $workplace, $uploadDate, $job_owner_id);
-            $queryGetJobInfo->fetch();
+            $queryGetJobInfo->bind_param("s", $order);
+            $queryGetJobInfo->execute();
+            $queryGetJobInfo->bind_result($job_id, $job_name, $min_salary, $max_salary, $company_name, $location, $workplace, $uploadDate, $job_owner_id);
+            $queryGetJobInfo->store_result();
             $NumberOfRows = $queryGetJobInfo->num_rows;
-            echo $NumberOfRows;
             if ($NumberOfRows > 0) {
                 while ($queryGetJobInfo->fetch()) {
                 if($max_salary == 0){
@@ -47,22 +48,22 @@
                 echo ('
                 <a href = "offer.php?id='.$job_id.'&sort='.$order.'">
                 <div id = "job_offer">
-                    <div class = "logo"><img src = "Images/photos_user_'.$job_owner_id.'/profileImage.png"</div>
+                    <img class = "logo" src = "Images/photos_user_'.$job_owner_id.'/profileImage.png" onerror="this.onerror=null; this.src=\'Images/error.png\'">
                     <div class = "higher_container">
                         <div class = "job_name">
-                            <h2 class = "job_name_text">'.$name.'</h2>
+                            <h2 class = "job_name_text">'.$job_name.'</h2>
                         </div>
                         <div class = "salary">
                             <h2 class = "job_salary_text">'.$salary.'</h2>
                         </div>
                         </div>
                         <div class = "lower_container"> 
-                            <div class = "company_name"><i class="material-icons">apartment</i>'.$companyName.'</div>
+                            <div class = "company_name"><i class="material-icons">apartment</i>'.$company_name.'</div>
                             <div class = "location"><i class="material-icons">location_on</i>'.$location.'</div>
-                            <div class = "workplace"><i class="material-icons">public</i>'.$workplacee.'</div>
+                            <div class = "workplace"><i class="material-icons">public</i>'.$workplace.'</div>
                             <div class = "date">'.$date->format("%a days ago").'</div>
+                        </div>
                     </div>
-                </div>
                 </a>
                 ');
                 }

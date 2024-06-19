@@ -198,10 +198,13 @@ function toggleApplicationInfo(job_id) {
 
 function toggleDeleteOverlay(job_id) {
     var questionBox = document.getElementById('deleteOfferBox_' + job_id);
+    var jobOffersScroll = document.getElementById('job_offers');
     if (questionBox.style.display === "none" || questionBox.style.display === "") {
         questionBox.style.display = "block";
+        jobOffersScroll.style.overflow = "clip";
     } else {
         questionBox.style.display = "none";
+        jobOffersScroll.style.overflow = "auto";
     }
 }
 
