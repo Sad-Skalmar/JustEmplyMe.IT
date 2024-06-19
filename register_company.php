@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $insertstmt->bind_param("sssss", $username, $hashed_password, $mail, $companyName, $tin);
                  
                 if ($insertstmt->execute()) {
+                    mkdir("Images/", "photos_user_".$conn->insert_id, 0655);
                     header("Location: index.php");
                     exit();
                 } else {

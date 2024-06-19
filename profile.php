@@ -29,7 +29,7 @@ $conn->close();
 <body>
     <div id="account">
         <div id="main_info">
-            <img id="myPhoto" src="images/myPhoto.png" onerror="this.onerror=null; this.src='images/error.jpg'" alt="no photo">
+            <img id="myPhoto" src="Images/photos_user_<?php echo $user_id?>/profileImage.png" onerror="this.onerror=null; this.src='Images/error.png'" alt="no photo">
             <form method="POST" id="mainInfo">
                 <input type="text" name="name" id="name" class="input" value="<?php echo $name?>" placeholder="First and last name" disabled/>
                 <input type="date" name="birthDate" id="birthDate" class="input" value="<?php echo $birthDate?>" placeholder="Date of birth" disabled/>

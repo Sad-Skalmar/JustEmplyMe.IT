@@ -54,6 +54,15 @@
             $querySelectInfo->store_result();
             
             $numberOfRows = $querySelectInfo->num_rows;
+            echo('
+            <form method = "POST">
+                <div id = "deleteOfferBox_'.$job_id.'" class = "deleteOfferBox">
+                    <p class = "deleteOfferQuestion">Are you sure you want to delete that offer?</p>
+                    <button type = "submit" name = "deleteOfferButton_'.$job_id.'">Yes</button>
+                    <button type = "submit" onclick = "toggleDeleteOverlay('.$job_id.')">No</button>
+                </div>
+            </form>
+            ');
             if($numberOfRows < 1){
                 echo('<div id="noOffers"><label>You don\'t have any job offers posted</label></div>');
             } else {
@@ -68,8 +77,9 @@
                     $finalDate = date_diff($todayDate, $uploadDate);
     
                     echo('
-                    <a href="offer.php?id='.$job_id.'">
                         <div id="job_offer">
+                            <div class = "deleteOfferButton" onclick = "toggleDeleteOverlay('.$job_id.')"><i class = "material-icons">close</i></div>
+                            <a href="offer.php?id='.$job_id.'">
                             <div class="job_name">'.$job_name.'</div>
                             <div class="salary">'.$salary.'</div>
                             <div class="company_name"><i class="material-icons">apartment</i>'.$company_name.'</div>
@@ -81,6 +91,10 @@
                         </div>
                     <div id="applicationInfo_'.$job_id.'" class="applicationInfo" style="display: none;">
                     ');
+
+                    if(isset($_POST['deleteOfferYes_'.$job_id])){
+                        echo 'chuj'.' '.$job_id;
+                    }
 
                     $queryApplicantInfo = $conn->prepare("SELECT `name`,applications.application_id, applications.user_id, applications.status, applications.application_date FROM users INNER JOIN applications ON users.id = applications.user_id WHERE applications.job_id = ?");
                     if ($queryApplicantInfo === false) {

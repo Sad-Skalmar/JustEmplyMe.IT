@@ -46,8 +46,12 @@ function editMainInfo(){
     var name = document.getElementById('name');
     var status = document.getElementById('work');
     var birthDate = document.getElementById('birthDate');
+    var avatarOverlay = document.getElementById('profileAvatarOverlay');
     document.getElementById('editMainInfoId').style.display = "none";
     document.getElementById('saveMainChanges').style.display = "block";
+
+
+    avatarOverlay.style.display="flex";
 
     name.classList.remove('input');
     name.classList.add('inputEditable');
@@ -192,3 +196,39 @@ function toggleApplicationInfo(job_id) {
     }
 }
 
+function toggleDeleteOverlay(job_id) {
+    var questionBox = document.getElementById('deleteOfferBox_' + job_id);
+    if (questionBox.style.display === "none" || questionBox.style.display === "") {
+        questionBox.style.display = "block";
+    } else {
+        questionBox.style.display = "none";
+    }
+}
+
+function previewAndUploadImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Wyświetl podgląd obrazu
+            document.getElementById('myPhoto').src = e.target.result;
+
+            // Utwórz formularz danych do wysłania
+            const formData = new FormData(document.getElementById('avatarForm'));
+
+            // Wyślij obraz na serwer
+            fetch('uploadAvatar.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log('Success:', result);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        };
+        reader.readAsDataURL(file);
+    }
+}

@@ -85,7 +85,7 @@ $conn->close();
     <meta charset="UTF-8"/>
     <title>Job Market - Dashboard</title>
     <link rel="stylesheet" href="style_account.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 </head>
 <body>
     <div id="account">
@@ -97,8 +97,13 @@ $conn->close();
             </ul>
         </div>
         <div id="main_info">
-            <img id="myPhoto" src="images/myPhoto.png" onerror="this.onerror=null; this.src='images/error.jpg'" alt="no photo">
-            <button type="button" id="editMainInfoId" class="editMainInfo" onClick="editMainInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+        <form id="avatarForm" method="POST" enctype="multipart/form-data">
+                <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewAndUploadImage(event)">
+                <input type="hidden" id="userId" name="user_id" value="<?php echo $user_id; ?>">
+        </form>
+        <img id="myPhoto" src="Images/photos_user_<?php echo $user_id; ?>/profileImage.png" onerror="this.onerror=null; this.src='Images/error.png'" alt="no photo">
+         <label><div id = "profileAvatarOverlay" onclick="document.getElementById('avatar').click()"><i class = "material-icons">add_circle</i></div></label>
+            <button type="button" id="editMainInfoId" class="editMainInfo" onClick="editMainInfo()"><i class="material-icons editInfoIcon">edit</i></button>
             <form method="POST" id="mainInfo">
                 <input type="text" name="name" id="name" class="input" value="<?php echo $name?>" placeholder="First and last name" disabled/>
                 <input type="date" name="birthDate" id="birthDate" class="input" value="<?php echo $birthDate?>" placeholder="Date of birth" disabled/>
@@ -108,7 +113,7 @@ $conn->close();
         </div>
 
         <div id="contact">
-            <button type="button" id="editContactInfoId" class="editContactInfo" onClick="editContactInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+            <button type="button" id="editContactInfoId" class="editContactInfo" onClick="editContactInfo()"><i class="material-icons editInfoIcon">edit</i></button>
             <form method="POST">
                 <input type="mail" name="mail" id="mail" class="input" value="<?php echo $email?>" placeholder="E-mail" disabled/>
                 <input type="tel" name="phoneNumber" id="phoneNumber" class="input" pattern="([0-9]{3} ?){2,4}[0-9]{3}" value="<?php echo $phoneNumber?>" placeholder="Tel. number (xxx xxx xxx)" disabled/></br>
@@ -117,7 +122,7 @@ $conn->close();
         </div>
 
         <div id="description">
-            <button type="button" id="editDescriptionInfoId" class="editDescriptionInfo" onClick="editDescriptionInfo()"><i class="fa-solid fa-pencil fa-xs"></i></button>
+            <button type="button" id="editDescriptionInfoId" class="editDescriptionInfo" onClick="editDescriptionInfo()"><i class="material-icons editInfoIcon">edit</i></button>
             <form method="POST">
                 <textarea id="aboutMe" class="input" name="aboutMe" placeholder="Something about me..." disabled><?php echo $description?></textarea>
                 <button type="submit" id="saveDescriptionChanges" name="saveDescriptionChanges">Save</button>
