@@ -30,7 +30,7 @@
         } else {
             echo '<script>
                 document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById("applyButton").style.display = "block";
+                document.getElementById("applyButton").style.display = "flex";
                 });
             </script>';
         }
@@ -89,34 +89,27 @@
                     <p class = "footer_level_subtext">'.@$workplace.'</p></div>
             </div>
             <form method = "POST">
-            <button id = "applyButton" name = "applyButton">Apply for job!</button>
+                <button type = "submit" id = "applyButton" name = "applyButton">Apply for job!</button>
             </form>
         <script>fixedPosition()</script>
     ');
-    
     if (isset($_POST['applyButton'])) {
         if($user_id != NULL){
-        $applicationDate = date("Y-m-d");
-        $status = 'Pending';
         $checkingIfApplied = $conn->prepare("SELECT application_id from applications where user_id = ? and job_id = ?");
         $checkingIfApplied->bind_param("ii", $user_id, $job_id);
         $checkingIfApplied->execute();
         $checkingIfApplied->bind_result($application_id);
         $checkingIfApplied->store_result();
         $checkingIfApplied->fetch();
-
+    
         if($checkingIfApplied->num_rows > 0){
             $applyresalut = "You already applied for this job!";
             $checkingIfApplied->close();
         }else{
-        $insertApplicationInfo = $conn->prepare("INSERT INTO applications (user_id, job_id, application_date, status) VALUES (?, ?, ?, ?)");
-        $insertApplicationInfo->bind_param("iiss", $user_id, $job_id, $applicationDate, $status);
-        $insertApplicationInfo->execute();
-        $insertApplicationInfo->close();
-        $applyresalut = "Application submitted successfully!";
-    }
+            echo '<script>open("application.php?id='.$job_id.'", "_self")</script>';
+        }
     }
     echo '<div class = "applyresault">'.@$applyresalut.'</div>';
-}
+    }
 }
 ?>

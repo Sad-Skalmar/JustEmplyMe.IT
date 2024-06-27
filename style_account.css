@@ -135,28 +135,35 @@ li:hover{
 .company_name .material-icons, .job_location .material-icons, .workplace .material-icons{
     margin-right: 0.5vw;
 }
+#deleteForm{
+    width: 0;
+    height: 0;
+}
 .deleteOfferButton {
     padding: 0.4vw 1vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #cc0000;
+    background-color: rgb(167, 88, 88);
     margin-left: 39.7vw;
     border-radius: 11px;
 }
 .deleteOfferButton:hover{
-    background-color: #a013138a;
+    filter: brightness(120%);
+    cursor: pointer;
     transition: ease 0.5s;
 }
 .deleteOfferBox{
-    text-align: center;
-    position: absolute;
+    position:relative;
     z-index: 100;
     width: 42vw;
     height: 13vw;
     border-radius: 11px;
     backdrop-filter: blur(2px);
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 /*applications info for applicants*/
 .applicationInfoButton{
@@ -182,6 +189,7 @@ li:hover{
     border-radius: 11px;
     margin-bottom: 1vw;
     padding: 1vw;
+    padding-top: 3vw;
     box-shadow: 1px 1px 3px black;
     overflow: hidden;
 }
@@ -193,16 +201,50 @@ li:hover{
     float: left;
     width: 7vw;
 }
-.applicationStatus{
-    text-align: center;
-    float: left;
-    margin-left: 23.5vw;
-}
 .statusText{
-    text-align: center;
-    width: 4vw;
+    width: 5vw;
     padding: 0.3vw;
     border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.statusText:hover{
+    cursor: pointer;
+    filter: brightness(110%);
+    transition: ease 0.5s;    
+}
+.statusList{
+    display: none;
+    width: 5vw;
+    border-radius: 11px;
+    list-style: none;
+    margin: 0vw;
+    text-align: center;
+}
+.list_element{
+    color: black;
+    width: 5.5vw;
+    padding: 0.5vw;
+    border-radius: 11px;
+    margin-top: 0.3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list_element:nth-child(1){
+    background-color: #93dfb2;
+}
+.list_element:nth-child(2){
+    background-color: #ffcc99;
+}
+.list_element:nth-child(3){
+    background-color: rgb(167, 88, 88);
+}
+.list_element:hover {
+    filter: brightness(120%);
+    cursor: pointer;
+    transition: ease 0.5s;
 }
 #noOffers{
     background-color: #ffffff;
@@ -225,7 +267,7 @@ li:hover{
     margin-bottom: 1.5vw;
 }
 .applicationStatusChange{
-    width: 4.5vw;
+    width: 4vw;
 }
 .applicationName, .applicationCV {
     a{

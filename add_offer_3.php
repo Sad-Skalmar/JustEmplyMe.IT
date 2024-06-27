@@ -26,7 +26,8 @@ if (isset($_POST['button_submit'])) {
     $queryInsert = $conn->prepare("INSERT INTO offers (`name`, `min_salary`, `max_salary`, `company`, `location`, `workplace`, `date`, `description`, `experience`, `type`, `job_owner_id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $queryInsert->bind_param("siisssssssi", $job_name, $min_salary, $max_salary, $company_name, $localization, $workplace, $date, $description, $experience, $type, $job_owner_id);
     if ($queryInsert->execute()) {
-        mkdir("Resumes", "Resumes_".$conn->insert_id, 0655);
+        $ResumesDirectory = "Resumes/Resumes_" . $conn->insert_id;
+        mkdir($ResumesDirectory, 0655);
         header("Location: index.php");
         exit();
     } else {

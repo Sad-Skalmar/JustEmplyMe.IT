@@ -92,8 +92,8 @@ $conn->close();
     <div id = "account">
     <div id = "nav">
             <ul>
-                <a href = "my_company_profile.php"><li>My profile</li></a>
-                <a href = "my_job_offers.php"><li>My Job offers</li></a>
+                <a href = "my_company_profile.php"><li>My Profile</li></a>
+                <a href = "my_job_offers.php"><li>My Job Offers</li></a>
                 <a href = "settings_company.php"><li>Settings</li></a>
             </ul>
         </div>

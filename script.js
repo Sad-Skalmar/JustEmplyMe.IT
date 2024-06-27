@@ -31,7 +31,7 @@ function fixedPosition(){
             console.log(scrollPosition);
             if (scrollPosition > 200) { 
                 jobPage.style.position = 'fixed';
-                jobPage.style.bottom =  '11.8vw';
+                jobPage.style.bottom =  '14vw';
                 jobPage.style.right = '6.2vw';
             } else {
                 jobPage.style.position = 'static'
@@ -175,18 +175,19 @@ descriptionInfoOver.addEventListener('mouseout', () => {
 
 function toggleApplicationInfo(job_id) {
     var infoDiv = document.getElementById("applicationInfo_" + job_id);
-    var icon = document.getElementById("toggleIcon_" + job_id);
+    var icon = document.getElementById("toggleApplicationIcon_" + job_id);
     if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
         infoDiv.style.display = "block";
         icon.textContent = "arrow_drop_up";
         var statusElements = infoDiv.getElementsByClassName("statusText");
         for (var i = 0; i < statusElements.length; i++) {
             var status = statusElements[i];
-            if (status.textContent.trim() === "Pending") {
+            var statusText = status.textContent.trim();
+            if (statusText.includes("Pending")) {
                 status.style.backgroundColor = "#ffcc99";
-            } else if (status.textContent.trim() === "Accepted") {
+            } else if (statusText.includes("Accepted")) {
                 status.style.backgroundColor = "#93dfb2";
-            } else if (status.textContent.trim() === "Declined") {
+            } else if (statusText.includes("Declined")) {
                 status.style.backgroundColor = "#ef010946";
             }
         }
@@ -196,18 +197,29 @@ function toggleApplicationInfo(job_id) {
     }
 }
 
+function toggleStatusInfo(applicationId) {
+    var infoDiv = document.getElementById("statusList_" + applicationId);
+    var icon = document.getElementById("toggleStatusIcon_" + applicationId);
+    if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
+        infoDiv.style.display = "block";
+        icon.textContent = "arrow_drop_up";
+        var statusElements = infoDiv.getElementsByClassName("statusText");
+    } else {
+        infoDiv.style.display = "none";
+        icon.textContent = "arrow_drop_down";
+    }
+}
+
+
 
 
 
 function toggleDeleteOverlay(job_id) {
     var questionBox = document.getElementById('deleteOfferBox_' + job_id);
-    var jobOffersScroll = document.getElementById('job_offers');
     if (questionBox.style.display === "none" || questionBox.style.display === "") {
-        questionBox.style.display = "block";
-        jobOffersScroll.style.overflow = "clip";
+        questionBox.style.display = "flex";
     } else {
         questionBox.style.display = "none";
-        jobOffersScroll.style.overflow = "auto";
     }
 }
 

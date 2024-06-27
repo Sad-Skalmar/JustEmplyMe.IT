@@ -105,8 +105,8 @@ function deleteAccount($conn, $user_id) {
     <div id="account">
         <div id="nav">
             <ul>
-                <a href="my_personal_profile.php"><li>My profile</li></a>
-                <a href="my_applications.php"><li>My applications</li></a>
+                <a href="my_personal_profile.php"><li>My Profile</li></a>
+                <a href="my_applications.php"><li>My Applications</li></a>
                 <a href="settings_personal.php"><li>Settings</li></a>
             </ul>
         </div>

@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usernamecheck = $conn->prepare("INSERT INTO users (`username`, `password`, `mail`, `name`, `phone`) VALUES (?, ?, ?, ?, ?)");
             $usernamecheck->bind_param("sssss", $username, $hashed_password, $mail, $name, $phone);
             if ($usernamecheck->execute()) {
-                mkdir("Images/", "photos_user_".$conn->insert_id, 0655);
+                mkdir("Images/photos_user_" . $conn->insert_id, 0655, true);
                 header("Location: index.php");
                 exit();
             } else {
